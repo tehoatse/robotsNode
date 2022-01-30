@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const directions = require('./directions');
 
 let controller;
@@ -9,8 +8,8 @@ module.exports.registerController = function(newController){
 
 module.exports.interpret = function(potentialCommand){
 
-    potentialCommand = _.toUpper(potentialCommand);
-    potentialCommand = _.split(potentialCommand, /[^A-Z0-9]/g);
+    potentialCommand = potentialCommand.toUpperCase();
+    potentialCommand = potentialCommand.split(/[^A-Z0-9]/g);
     
     if(potentialCommand[0] === 'PLACE'){
         return addRobot(potentialCommand);

@@ -1,6 +1,5 @@
 const Robot = require('./Robot');
 const directions = require('./directions');
-const _ = require('lodash');
 
 module.exports = class RobotController{
     constructor(){
@@ -11,8 +10,8 @@ module.exports = class RobotController{
     }
 
     createRobot(xCoordinate, yCoordinate, facing){
-        xCoordinate = _.parseInt(xCoordinate);
-        yCoordinate = _.parseInt(yCoordinate);
+        xCoordinate = parseInt(xCoordinate);
+        yCoordinate = parseInt(yCoordinate);
 
         if(this.hasRobot()){
             return false;
@@ -34,6 +33,9 @@ module.exports = class RobotController{
 
     updatePosition(xCoordinate, yCoordinate, facing){
         const newPosition = this.#checkBoundaries(xCoordinate, yCoordinate);
+        if(!newPosition){
+            return newPosition;
+        }
         this.robot.xCoordinate = xCoordinate;
         this.robot.yCoordinate = yCoordinate;
         this.robot.facing = facing;

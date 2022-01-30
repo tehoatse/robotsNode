@@ -24,16 +24,3 @@ rl.on('line', (inputString) =>{
     }
     rl.prompt();
 });
-
-
-// rl.question('Please enter your command: ', (newInput) =>{
-//     console.log(newInput);
-//     //rl.close();
-// });
-
-// rl.on('close', function(){
-//   console.log(`\nthankyou for playing`)
-// });
-// // let robot = new Robot(1, 1, 'north');
-// // console.log(robot);
-
