@@ -47,26 +47,26 @@ function addRobot(potentialCommand){
 
 function moveRobot(){
     let robot = controller.robot;
-    let facing = robot.facing;
+    let moveDirection = robot.facing;
     let newXCoordinate = robot.xCoordinate;
     let newYCoordinate = robot.yCoordinate;
 
-    if(facing === directions.NORTH){
+    if(moveDirection === directions.NORTH){
         newYCoordinate++;
     }
-    if(facing === directions.EAST){
+    if(moveDirection === directions.EAST){
         newXCoordinate++;
     }
-    if(facing === directions.SOUTH){
+    if(moveDirection === directions.SOUTH){
         newYCoordinate--;
     }
-    if(facing === directions.WEST){
+    if(moveDirection === directions.WEST){
         newXCoordinate--;
     }
     return controller.updatePosition(
         newXCoordinate, 
-        newYCoordinate, 
-        facing
+        newYCoordinate,
+        robot.facing 
     );
 }
 
