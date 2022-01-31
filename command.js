@@ -80,7 +80,7 @@ function turnLeft(){
 }
 
 function turnRight(){
-    let robot = controller.Robot;
+    let robot = controller.robot;
     return controller.updatePosition(
         robot.xCoordinate, 
         robot.yCoordinate, 
