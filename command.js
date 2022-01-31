@@ -65,8 +65,7 @@ function moveRobot(){
     }
     return controller.updatePosition(
         newXCoordinate, 
-        newYCoordinate,
-        robot.facing 
+        newYCoordinate, 
     );
 }
 

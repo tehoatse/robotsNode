@@ -32,14 +32,17 @@ module.exports = class RobotController{
     }
 
     updatePosition(xCoordinate, yCoordinate, facing){
-        const newPosition = this.#checkBoundaries(xCoordinate, yCoordinate);
-        if(!newPosition){
-            return newPosition;
+        const positionIsWithinBoundaries = this.#checkBoundaries(xCoordinate, yCoordinate);
+        if(!positionIsWithinBoundaries){
+            return positionIsWithinBoundaries;
         }
+        if(typeof facing !== 'undefined'){
+            this.robot.facing = facing;
+        }
+
         this.robot.xCoordinate = xCoordinate;
         this.robot.yCoordinate = yCoordinate;
-        this.robot.facing = facing;
-        return newPosition;
+        return positionIsWithinBoundaries;
     }
 
     getReport(){
