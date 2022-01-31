@@ -29,13 +29,15 @@ module.exports.isReal = function(potentialDirection){
 
 function updateDirection(currentDirection, increment){
     let newIndex = directionArray.indexOf(currentDirection) + increment;
-
+    
+    //turn right
     if(newIndex >= directionArray.length){
-        newIndex = 0;
+        newIndex = newIndex - directionArray.length;
     }
 
+    //turn left
     if(newIndex < 0){
-        newIndex = directionArray.length - 1;
+        newIndex = directionArray.length + newIndex;
     }
     
     return directionArray[newIndex];
