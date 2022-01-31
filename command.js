@@ -2,7 +2,7 @@ const directions = require('./directions');
 
 let controller;
 
-module.exports.registerController = function(newController){
+module.exports.setController = function(newController){
     controller = newController;
 }
 
@@ -47,26 +47,26 @@ function addRobot(potentialCommand){
 
 function moveRobot(){
     let robot = controller.robot;
-    let newFacing = robot.facing;
+    let facing = robot.facing;
     let newXCoordinate = robot.xCoordinate;
     let newYCoordinate = robot.yCoordinate;
 
-    if(newFacing === directions.NORTH){
+    if(facing === directions.NORTH){
         newYCoordinate++;
     }
-    if(newFacing === directions.EAST){
+    if(facing === directions.EAST){
         newXCoordinate++;
     }
-    if(newFacing === directions.SOUTH){
+    if(facing === directions.SOUTH){
         newYCoordinate--;
     }
-    if(newFacing === directions.WEST){
+    if(facing === directions.WEST){
         newXCoordinate--;
     }
     return controller.updatePosition(
         newXCoordinate, 
         newYCoordinate, 
-        newFacing
+        facing
     );
 }
 

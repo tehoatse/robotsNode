@@ -1,11 +1,10 @@
 const chai = require('chai');
-const { is } = require('express/lib/request');
 const expect = chai.expect;
 const directions = require('./directions');
 
-describe('testing directions', () => {
-    context('testing export', () => {
-        it('should have bindings that match', () => {
+describe('directions', () => {
+    context('directions', () => {
+        it('should have bindings that equal themselves', () => {
             let facing = directions.NORTH;
             expect(facing).to.equal(directions.NORTH);
             facing = directions.EAST;

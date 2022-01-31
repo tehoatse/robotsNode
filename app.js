@@ -10,7 +10,7 @@ const rl = readline.createInterface({
 });
 
 const controller = new RobotController();
-command.registerController(controller);
+command.setController(controller);
 
 rl.setPrompt('Please enter your command: ');
 rl.prompt();
