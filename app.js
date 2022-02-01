@@ -1,7 +1,7 @@
 const readline = require('readline');
 
 const RobotController = require('./RobotController');
-const command = require('./command');
+const interpreter = require('./commandInterpreter');
 
 
 const rl = readline.createInterface({
@@ -10,13 +10,13 @@ const rl = readline.createInterface({
 });
 
 const controller = new RobotController();
-command.setController(controller);
+interpreter.setController(controller);
 
 rl.setPrompt('Please enter your command: ');
 rl.prompt();
 
 rl.on('line', (inputString) =>{
-    let success = command.interpret(inputString);
+    let success = interpreter.interpret(inputString);
     if(success){
         console.log('command successful');
     } else{

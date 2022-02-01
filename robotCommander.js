@@ -6,38 +6,7 @@ module.exports.setController = function(newController){
     controller = newController;
 }
 
-module.exports.interpret = function(potentialCommand){
-
-    potentialCommand = potentialCommand.toUpperCase();
-    potentialCommand = potentialCommand.split(/[^A-Z0-9]/g);
-    
-    if(potentialCommand[0] === 'PLACE'){
-        return addRobot(potentialCommand);
-    }
-
-    if(!controller.hasRobot()){
-        return false;
-    }
-
-    if(potentialCommand[0] === 'REPORT'){
-        return logReport();
-    }
-
-    if(potentialCommand[0] === 'MOVE'){
-        return moveRobot();
-    }
-
-    if(potentialCommand[0] === 'LEFT'){
-        return turnLeft();
-    }
-
-    if(potentialCommand[0] === 'RIGHT'){
-        return turnRight();
-    }
-    return false;
-}
-
-function addRobot(potentialCommand){
+module.exports.addRobot = function(potentialCommand){
     return controller.createRobot(
         potentialCommand[1],
         potentialCommand[2],
@@ -45,7 +14,7 @@ function addRobot(potentialCommand){
     );
 }
 
-function moveRobot(){
+module.exports.moveRobot = function(){
     let robot = controller.robot;
     let moveDirection = robot.facing;
     let newXCoordinate = robot.xCoordinate;
@@ -69,7 +38,7 @@ function moveRobot(){
     );
 }
 
-function turnLeft(){
+module.exports.turnLeft = function(){
     let robot = controller.robot;
     return controller.updatePosition(
         robot.xCoordinate, 
@@ -78,7 +47,7 @@ function turnLeft(){
     );
 }
 
-function turnRight(){
+module.exports.turnRight = function(){
     let robot = controller.robot;
     return controller.updatePosition(
         robot.xCoordinate, 
@@ -87,7 +56,7 @@ function turnRight(){
     );
 }
 
-function logReport(){
+module.exports.logReport = function(){
     console.log(controller.getReport());
     return true;
 }
