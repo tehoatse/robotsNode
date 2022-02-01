@@ -4,7 +4,6 @@ const RobotController = require('./RobotController');
 const interpreter = require('./commandInterpreter');
 const commander = require('./robotCommander');
 
-
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
