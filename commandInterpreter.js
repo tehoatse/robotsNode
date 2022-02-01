@@ -10,7 +10,7 @@ module.exports.interpret = function(potentialCommand){
     potentialCommand = potentialCommand.toUpperCase();
     potentialCommand = potentialCommand.split(/[^A-Z0-9]/g);
     
-    if(potentialCommand[0] === 'PLACE'){
+    if(potentialCommand[0] === 'PLACE' && !controller.hasRobot()){
         return command.addRobot(potentialCommand);
     }
 
