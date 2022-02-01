@@ -2,6 +2,7 @@ const readline = require('readline');
 
 const RobotController = require('./RobotController');
 const interpreter = require('./commandInterpreter');
+const commander = require('./robotCommander');
 
 
 const rl = readline.createInterface({
@@ -11,6 +12,7 @@ const rl = readline.createInterface({
 
 const controller = new RobotController();
 interpreter.setController(controller);
+commander.setController(controller);
 
 rl.setPrompt('Please enter your command: ');
 rl.prompt();

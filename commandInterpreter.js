@@ -4,7 +4,6 @@ let controller;
 
 module.exports.setController = function(newController){
     controller = newController;
-    command.setController(controller);
 }
 
 module.exports.interpret = function(potentialCommand){
