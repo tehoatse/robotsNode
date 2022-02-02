@@ -14,8 +14,17 @@ module.exports.addRobot = function(potentialCommand){
     );
 }
 
+module.exports.setActiveRobot = function(potentialCommand){
+    let robotNumber = parseInt(potentialCommand[1]);
+    if(typeof robotNumber !== 'number' || robotNumber > controller.robots.length || robotNumber < 0){
+        return false;
+    }
+    controller.setActiveRobot(controller.robots[robotNumber-1]);
+    return true;
+}
+
 module.exports.moveRobot = function(){
-    let robot = controller.robot;
+    let robot = controller.activeRobot;
     let moveDirection = robot.facing;
     let newXCoordinate = robot.xCoordinate;
     let newYCoordinate = robot.yCoordinate;
@@ -39,7 +48,7 @@ module.exports.moveRobot = function(){
 }
 
 module.exports.turnLeft = function(){
-    let robot = controller.robot;
+    let robot = controller.activeRobot;
     return controller.updatePosition(
         robot.xCoordinate, 
         robot.yCoordinate, 
@@ -48,7 +57,7 @@ module.exports.turnLeft = function(){
 }
 
 module.exports.turnRight = function(){
-    let robot = controller.robot;
+    let robot = controller.activeRobot;
     return controller.updatePosition(
         robot.xCoordinate, 
         robot.yCoordinate, 

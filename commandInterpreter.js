@@ -10,12 +10,16 @@ module.exports.interpret = function(potentialCommand){
     potentialCommand = potentialCommand.toUpperCase();
     potentialCommand = potentialCommand.split(/[^A-Z0-9]/g);
     
-    if(potentialCommand[0] === 'PLACE' && !controller.hasRobot()){
+    if(potentialCommand[0] === 'PLACE'){
         return command.addRobot(potentialCommand);
     }
 
     if(!controller.hasRobot()){
         return false;
+    }
+
+    if(potentialCommand[0] === 'ROBOT'){
+        return command.setActiveRobot(potentialCommand);
     }
 
     if(potentialCommand[0] === 'REPORT'){

@@ -7,25 +7,25 @@ module.exports = class RobotController{
         this.RIGHT_BOUNDARY = 4;
         this.LEFT_BOUNDARY = 0;
         this.BOTTOM_BOUNDARY = 0;
+        this.robots = [];
+        this.activeRobot = null;
     }
 
     createRobot(xCoordinate, yCoordinate, facing){
         xCoordinate = parseInt(xCoordinate);
         yCoordinate = parseInt(yCoordinate);
 
-        if(this.hasRobot()){
-            return false;
-        }
-
         if(this.#checkBoundaries(xCoordinate, yCoordinate) && directions.isReal(facing)){
-            this.robot = new Robot(xCoordinate, yCoordinate, facing);
+            let newRobot = new Robot(xCoordinate, yCoordinate, facing);
+            this.robots.push(newRobot);
+            this.activeRobot = newRobot;
             return true;
-        }
+        }        
         return false;
     }
     
     hasRobot(){
-        if(typeof this.robot !== 'undefined'){
+        if(this.robots.length > 0){
             return true; 
         }
         return false;
@@ -37,16 +37,33 @@ module.exports = class RobotController{
             return positionIsWithinBoundaries;
         }
         if(typeof facing !== 'undefined'){
-            this.robot.facing = facing;
+            this.activeRobot.facing = facing;
         }
 
-        this.robot.xCoordinate = xCoordinate;
-        this.robot.yCoordinate = yCoordinate;
+        this.activeRobot.xCoordinate = xCoordinate;
+        this.activeRobot.yCoordinate = yCoordinate;
         return positionIsWithinBoundaries;
     }
 
     getReport(){
-        return `${this.robot.xCoordinate},${this.robot.yCoordinate},${this.robot.facing}`;
+        let report = '';
+        this.robots.forEach(robot => {
+            const robotNumber = this.robots.indexOf(robot) + 1;
+            report = report + 'robot ' + robotNumber + ' - ';
+            report = report + `${robot.xCoordinate},${robot.yCoordinate},${robot.facing}`
+            if(robot === this.activeRobot){
+                report = report + ' -- active robot';
+            }
+            if(this.robots.indexOf(robot) !== this.robots.length-1){
+                report = report + '\n';
+            }
+        });
+        return report;
+    }
+
+    setActiveRobot(robot){
+        this.activeRobot = robot;
+        
     }
 
     #checkBoundaries(xCoordinate, yCoordinate){
