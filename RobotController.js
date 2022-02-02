@@ -62,8 +62,7 @@ module.exports = class RobotController{
     }
 
     setActiveRobot(robot){
-        this.activeRobot = robot;
-        
+        this.activeRobot = robot; 
     }
 
     #checkBoundaries(xCoordinate, yCoordinate){
