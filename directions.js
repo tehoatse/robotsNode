@@ -1,19 +1,14 @@
-const NORTH = 'NORTH';
-const EAST = 'EAST';
-const SOUTH = 'SOUTH';
-const WEST = 'WEST';
-
 const directionArray = [
-    NORTH,
-    EAST,
-    SOUTH,
-    WEST
+    'NORTH',
+    'EAST',
+    'SOUTH',
+    'WEST'
 ]
 
-module.exports.NORTH = NORTH;
-module.exports.EAST = EAST;
-module.exports.SOUTH = SOUTH;
-module.exports.WEST = WEST;
+module.exports.NORTH = directionArray[0];
+module.exports.EAST = directionArray[1];
+module.exports.SOUTH = directionArray[2];
+module.exports.WEST = directionArray[3];
 
 module.exports.left = function(currentDirection){
     return updateDirection(currentDirection, -1);
