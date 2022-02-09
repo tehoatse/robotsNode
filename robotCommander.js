@@ -1,12 +1,12 @@
-const directions = require('./directions');
+const directions = require("./directions");
 
 let controller;
 
-module.exports.setController = function(newController){
+function setController(newController) {
     controller = newController;
 }
 
-module.exports.addRobot = function(potentialCommand){
+function addRobot(potentialCommand) {
     return controller.createRobot(
         potentialCommand[1],
         potentialCommand[2],
@@ -14,58 +14,69 @@ module.exports.addRobot = function(potentialCommand){
     );
 }
 
-module.exports.setActiveRobot = function(potentialCommand){
+function setActiveRobot(potentialCommand) {
     let robotNumber = parseInt(potentialCommand[1]);
-    if(typeof robotNumber !== 'number' || robotNumber > controller.robots.length || robotNumber < 0){
+    if (
+        typeof robotNumber !== "number" ||
+        robotNumber > controller.robots.length ||
+        robotNumber < 0
+    ) {
         return false;
     }
-    controller.setActiveRobot(controller.robots[robotNumber-1]);
+    controller.setActiveRobot(controller.robots[robotNumber - 1]);
     return true;
 }
 
-module.exports.moveRobot = function(){
+function moveRobot() {
     let robot = controller.activeRobot;
     let moveDirection = robot.facing;
     let newXCoordinate = robot.xCoordinate;
     let newYCoordinate = robot.yCoordinate;
 
-    if(moveDirection === directions.NORTH){
+    if (moveDirection === directions.NORTH) {
         newYCoordinate++;
     }
-    if(moveDirection === directions.EAST){
+    if (moveDirection === directions.EAST) {
         newXCoordinate++;
     }
-    if(moveDirection === directions.SOUTH){
+    if (moveDirection === directions.SOUTH) {
         newYCoordinate--;
     }
-    if(moveDirection === directions.WEST){
+    if (moveDirection === directions.WEST) {
         newXCoordinate--;
     }
-    return controller.updatePosition(
-        newXCoordinate, 
-        newYCoordinate, 
-    );
+    return controller.updatePosition(newXCoordinate, newYCoordinate);
 }
 
-module.exports.turnLeft = function(){
+function turnLeft() {
     let robot = controller.activeRobot;
     return controller.updatePosition(
-        robot.xCoordinate, 
-        robot.yCoordinate, 
+        robot.xCoordinate,
+        robot.yCoordinate,
         directions.left(robot.facing)
     );
 }
 
-module.exports.turnRight = function(){
+function turnRight() {
     let robot = controller.activeRobot;
     return controller.updatePosition(
-        robot.xCoordinate, 
-        robot.yCoordinate, 
+        robot.xCoordinate,
+        robot.yCoordinate,
         directions.right(robot.facing)
     );
 }
 
-module.exports.logReport = function(){
+function logReport() {
     console.log(controller.getReport());
     return true;
 }
+
+module.exports = {
+    setController,
+    addRobot,
+    setActiveRobot,
+    moveRobot,
+    turnLeft,
+    turnRight,
+    logReport,
+};
