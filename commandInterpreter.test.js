@@ -83,5 +83,49 @@ describe("commandInterpreter", () => {
             commandInterpreter.interpret("place 1,1,north");
             expect(commandInterpreter.interpret("REPORT")).to.equal(true);
         });
+        it("should move correctly", () => {
+            commandInterpreter.interpret("place 1,1,north");
+            expect(commandInterpreter.interpret("move")).to.equal(true);
+            expect(this.controller.activeRobot.xCoordinate).to.equal(1);
+            expect(this.controller.activeRobot.yCoordinate).to.equal(2);
+            expect(this.controller.activeRobot.facing).to.equal('NORTH');
+        });
+        it("should not cross bottom boundary with move command", () => {
+            commandInterpreter.interpret(
+                `place ${this.controller.LEFT_BOUNDARY},${this.controller.BOTTOM_BOUNDARY},south`
+            );
+            commandInterpreter.interpret("move");
+            expect(this.controller.activeRobot.xCoordinate).to.equal(this.controller.LEFT_BOUNDARY);
+            expect(this.controller.activeRobot.yCoordinate).to.equal(this.controller.BOTTOM_BOUNDARY);
+            expect(this.controller.activeRobot.facing).to.equal('SOUTH');
+        });
+        it("should not cross left boundary with move command", () => {
+            commandInterpreter.interpret(
+                `place ${this.controller.LEFT_BOUNDARY},${this.controller.BOTTOM_BOUNDARY},west`
+            );
+            commandInterpreter.interpret("move");
+            expect(this.controller.activeRobot.xCoordinate).to.equal(this.controller.LEFT_BOUNDARY);
+            expect(this.controller.activeRobot.yCoordinate).to.equal(this.controller.BOTTOM_BOUNDARY);
+            expect(this.controller.activeRobot.facing).to.equal('WEST');
+        });
+        it("should not cross top boundary with move command", () => {
+            commandInterpreter.interpret(
+               `place ${this.controller.RIGHT_BOUNDARY},${this.controller.TOP_BOUNDARY},north`
+            );
+            commandInterpreter.interpret("move");
+            expect(this.controller.activeRobot.xCoordinate).to.equal(this.controller.RIGHT_BOUNDARY);
+            expect(this.controller.activeRobot.yCoordinate).to.equal(this.controller.TOP_BOUNDARY);
+            expect(this.controller.activeRobot.facing).to.equal("NORTH");
+            
+        });
+        it("should not cross right boundary with move command", () => {
+            commandInterpreter.interpret(
+                `place ${this.controller.RIGHT_BOUNDARY},${this.controller.TOP_BOUNDARY},east`
+            );
+            commandInterpreter.interpret("move");
+            expect(this.controller.activeRobot.xCoordinate).to.equal(this.controller.RIGHT_BOUNDARY);
+            expect(this.controller.activeRobot.yCoordinate).to.equal(this.controller.TOP_BOUNDARY);
+            expect(this.controller.activeRobot.facing).to.equal("EAST");
+        });
     });
 });
