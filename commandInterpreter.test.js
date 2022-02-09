@@ -79,10 +79,9 @@ describe("commandInterpreter", () => {
             commandInterpreter.interpret("right");
             expect(this.controller.activeRobot.facing).to.equal("NORTH");
         });
-        it("should report"),
-            () => {
-                commandInterpreter.interpret("place 0,0,north");
-                expect(commandInterpreter.interpret("report")).to.equal(true);
-            };
+        it("should report", () => {
+            commandInterpreter.interpret("place 1,1,north");
+            expect(commandInterpreter.interpret("REPORT")).to.equal(true);
+        });
     });
 });
